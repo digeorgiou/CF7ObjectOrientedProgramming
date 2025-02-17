@@ -2,25 +2,35 @@ package interface_exercise02;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         Circle c1 = new Circle(1, 2);
-        Rectangle r1 = new Rectangle(2, 10, 20);
-        Line l1 = new Line(3, 5);
+        try{
+           Circle c2 = c1.clone();
 
-        IShape r2 = new Rectangle(4, 5, 6);
+            System.out.println(c1);
+            System.out.println(c2);
+            c2.setRadius(10);
+            System.out.println(c2);
+            System.out.println(c1);
 
-        IRectangle r3 = new Rectangle(5,6,6);
+        } catch (CloneNotSupportedException e) {
+            System.err.println(e.getMessage());;
+        }
 
+        System.out.println("----Copy Constructor---");
 
-        System.out.println(r1.getArea());
-        System.out.println(r1.getCircumference());
-        System.out.println(r1.getId());
+        Circle c3 = new Circle(c1);
 
-        r1.setId(10);
-        System.out.println(r1.getId());
+        System.out.println(c3);
+        System.out.println(c1.equals(c3));
 
-        r3.getArea();
-        r3.getCircumference();
+        Circle c4 = new Circle(1,5);
+        System.out.println(c3.equals(c4));
+
+        System.out.println(c1.hashCode());
+        System.out.println(c3.hashCode());
+        System.out.println(c4.hashCode());
+
     }
 }

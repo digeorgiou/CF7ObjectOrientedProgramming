@@ -1,0 +1,34 @@
+package lambda_advanced;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+
+    private static final List<Teacher> teachers = List.of(
+            new Teacher(1, "Alice", "W."),
+            new Teacher(2, "Bob", "D."),
+            new Teacher(3, "Costas", "A."));
+
+    public static void main(String[] args) {
+            List<Teacher> teachers1 = getFilteredTeachers(teachers,
+                    teacher -> teacher.getId() == 2);
+            teachers1.forEach(System.out::println);
+
+    }
+
+
+    //δεν χρειαζεται καν να ορισουμε εμεις δικο μας interface για να περασουμε
+    //την lambda
+    public static List<Teacher> getFilteredTeachers(List<Teacher> teachers,
+                                                    ITeacherFilter filter){
+        List<Teacher> teachersToReturn = new ArrayList<>();
+
+        for(Teacher teacher : teachers){
+            if (filter.filterId(teacher)){
+                teachersToReturn.add(teacher);
+            }
+        }
+        return teachersToReturn;
+    }
+}
